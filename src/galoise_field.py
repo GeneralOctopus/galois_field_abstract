@@ -26,6 +26,10 @@ class GaloisFieldElement(object):
         if self.is_operation_valid(other):
             return GaloisFieldElement(self.modulus, self.value * other.value)
 
+    def __div__(self, other):
+        if self.is_operation_valid(other):
+            return GaloisFieldElement(self.modulus, self.value / other.value)
+
 
 class GaloisFieldGenerator(object):
     
