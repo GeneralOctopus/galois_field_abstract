@@ -118,3 +118,17 @@ def test_dividing_two_positive_elements():
     assert element4.modulus == modulus
     assert element1.value == 1
     assert element1.modulus == modulus
+
+
+def test_power_two_positive_elements():
+    modulus = 2**4
+    generator = GaloisFieldGenerator(modulus)
+    element1 = generator.generate(2)
+    element2 = generator.generate(3)
+    element3 = generator.generate(5)
+
+    element4 = element1 ** element2
+    element5 = element1 ** element3
+
+    assert element4.value == 8
+    assert element4.modulus == modulus
