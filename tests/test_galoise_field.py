@@ -132,3 +132,23 @@ def test_power_two_positive_elements():
 
     assert element4.value == 8
     assert element4.modulus == modulus
+
+
+def test_negate_element():
+    modulus = 2**4
+    generator = GaloisFieldGenerator(modulus)
+    element1 = generator.generate(9)
+    element2 = generator.generate(3)
+    element3 = (-element1) + element2
+    element4 = (-element1) - element2
+    element5 = (-element1) * element2
+    element6 = (-element1) / element2
+
+    assert element3.value == 10 
+    assert element4.value == 4
+    assert element5.value == 5
+    assert element6.value == 2
+    assert element3.modulus == modulus
+    assert element4.modulus == modulus
+    assert element5.modulus == modulus
+    assert element6.modulus == modulus

@@ -34,6 +34,9 @@ class GaloisFieldElement(object):
         if self.is_operation_valid(other):
             return GaloisFieldElement(self.modulus, self.value ** other.value)
 
+    def __neg__(self):
+        return GaloisFieldElement(self.modulus, -self.value)
+
 
 class GaloisFieldGenerator(object):
     
