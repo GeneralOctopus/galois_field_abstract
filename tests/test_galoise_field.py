@@ -77,7 +77,27 @@ def test_element_is_not_from_the_same_field():
     with pytest.raises(ValueError):
         element4 = element1 - element2
     with pytest.raises(ValueError):
+        element4 = element1 * element2
+    with pytest.raises(ValueError):
         element4 = element1 + element3
     with pytest.raises(ValueError):
         element4 = element1 - element3
+    with pytest.raises(ValueError):
+        element4 = element1 * element3
 
+
+def test_multiplying_two_positive_elements():
+    modulus = 2**4
+    generator = GaloisFieldGenerator(modulus)
+    element1 = generator.generate(7)
+    element2 = generator.generate(3)
+    element3 = generator.generate(11)
+
+    element4 = element1 * element2
+
+    element1 *= element3
+
+    assert element4.value == 5
+    assert element4.modulus == modulus
+    assert element1.value == 13
+    assert element1.modulus == modulus

@@ -21,6 +21,12 @@ class GaloisFieldElement(object):
         else:
             raise ValueError("Elements are from different fields")
 
+    def __mul__(self, other):
+        if isinstance(other, GaloisFieldElement) and self.modulus == other.modulus:
+            return GaloisFieldElement(self.modulus, self.value * other.value)
+        else:
+            raise ValueError("Elements are from different fields")
+
 
 class GaloisFieldGenerator(object):
     
