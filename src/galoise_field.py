@@ -13,6 +13,10 @@ class GaloisFieldElement(object):
         if isinstance(other, GaloisFieldElement) and self.modulus == other.modulus:
             return GaloisFieldElement(self.modulus, self.value + other.value)
 
+    def __sub__(self, other):
+        if isinstance(other, GaloisFieldElement) and self.modulus == other.modulus:
+            return GaloisFieldElement(self.modulus, self.value - other.value)
+
 
 class GaloisFieldGenerator(object):
     

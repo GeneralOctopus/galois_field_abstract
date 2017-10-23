@@ -44,3 +44,22 @@ def test_add_two_positive_elements():
     assert element4.modulus == modulus
     assert element1.value == 2
     assert element1.modulus == modulus
+
+
+def test_subtract_two_positive_elements():
+    modulus = 2**4
+    generator = GaloisFieldGenerator(modulus)
+    element1 = generator.generate(7)
+    element2 = generator.generate(3)
+    element3 = generator.generate(11)
+
+    element4 = element1 - element2
+
+    element1 -= element3
+
+    assert element4.value == 4
+    assert element4.modulus == modulus
+    assert element1.value == 12
+    assert element1.modulus == modulus
+
+
