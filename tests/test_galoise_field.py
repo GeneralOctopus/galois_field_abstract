@@ -63,3 +63,21 @@ def test_subtract_two_positive_elements():
     assert element1.modulus == modulus
 
 
+def test_element_is_not_from_the_same_field():
+    modulus = 2**4
+    generator = GaloisFieldGenerator(modulus)
+    modulus2 = 2**5
+    generator2 = GaloisFieldGenerator(modulus2)
+    element1 = generator.generate(7)
+    element2 = generator2.generate(7)
+    element3 = 7
+
+    with pytest.raises(ValueError):
+        element4 = element1 + element2
+    with pytest.raises(ValueError):
+        element4 = element1 - element2
+    with pytest.raises(ValueError):
+        element4 = element1 + element3
+    with pytest.raises(ValueError):
+        element4 = element1 - element3
+
