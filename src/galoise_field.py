@@ -1,6 +1,11 @@
 
 class GaloisFieldElement(object):
     """implementation"""
+    def is_operation_valid(self, other):
+        if isinstance(other, GaloisFieldElement) and self.modulus == other.modulus:
+            return True
+        else:
+            raise ValueError("Elements are from different fields")
     
     def __init__(self, modulus, value):
         self.modulus = modulus
@@ -10,22 +15,16 @@ class GaloisFieldElement(object):
         return isinstance(other, GaloisFieldElement) and (self.value == other.value) and (self.modulus == other.modulus) 
 
     def __add__(self, other):
-        if isinstance(other, GaloisFieldElement) and self.modulus == other.modulus:
+        if self.is_operation_valid(other):
             return GaloisFieldElement(self.modulus, self.value + other.value)
-        else:
-            raise ValueError("Elements are from different fields")
 
     def __sub__(self, other):
-        if isinstance(other, GaloisFieldElement) and self.modulus == other.modulus:
+        if self.is_operation_valid(other):
             return GaloisFieldElement(self.modulus, self.value - other.value)
-        else:
-            raise ValueError("Elements are from different fields")
 
     def __mul__(self, other):
-        if isinstance(other, GaloisFieldElement) and self.modulus == other.modulus:
+        if self.is_operation_valid(other):
             return GaloisFieldElement(self.modulus, self.value * other.value)
-        else:
-            raise ValueError("Elements are from different fields")
 
 
 class GaloisFieldGenerator(object):
