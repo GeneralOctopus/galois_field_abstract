@@ -152,3 +152,12 @@ def test_negate_element():
     assert element4.modulus == modulus
     assert element5.modulus == modulus
     assert element6.modulus == modulus
+
+
+def test_inverse_element():
+    modulus = 2**4
+    generator = GaloisFieldGenerator(modulus)
+    element1 = generator.generate(9)
+    element2 = element1.inverse()
+    
+    assert element1*element2 == GaloisFieldElement(modulus, 1)

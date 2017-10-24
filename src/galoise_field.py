@@ -1,6 +1,21 @@
+def ext_gcd(a, b):
+    if a == 0:
+        return (b, 0, 1)
+    if b == 0:
+        return (a, 1, 0)
+    q, r = divmod(b, a)
+    d, xp, yp = ext_gcd(r, a)
+    return (d, yp-q*xp, xp)
+
+
+def invmod(a, n):
+    d, x, y = ext_gcd(a, n)
+    if abs(d) != 1:
+        raise ValueError("modulo must be coprime with the element")
+    return x * d
+
 
 class GaloisFieldElement(object):
-    """implementation"""
     def is_operation_valid(self, other):
         if isinstance(other, GaloisFieldElement) and self.modulus == other.modulus:
             return True
@@ -36,6 +51,12 @@ class GaloisFieldElement(object):
 
     def __neg__(self):
         return GaloisFieldElement(self.modulus, -self.value)
+
+    def __repr__(self):
+        return "%d" % self.value
+
+    def inverse(self):
+        return GaloisFieldElement(self.modulus, invmod(self.value, self.modulus))
 
 
 class GaloisFieldGenerator(object):
